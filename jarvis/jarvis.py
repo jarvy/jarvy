@@ -1,13 +1,14 @@
-import time
-
 __author__ = 'semih'
 
 import random
 from random import randint
+import time
 import logging
 import os
+
 from actions import *
 from settings import *
+
 
 class Jarvis:
     """ Core jarvis class
@@ -16,8 +17,8 @@ class Jarvis:
     __LOG_LOCATION__ = "log/jarvis.log"
 
     def __init__(self):
-        self.__setupLogger__()
 
+        self.__setupLogger__()
         self.actions = Actions()
         self.settings = Settings()
         self.status = True
@@ -27,7 +28,7 @@ class Jarvis:
     def __setupLogger__(self):
 
         self.logger = logging.getLogger('Jarvis')
-        self.logger.setLevel(logging.DEBUG)
+        self.logger.setLevel(logging.INFO)
 
         # Log formatting
         formatter = logging.Formatter('%(asctime)s\t%(name)s\t%(levelname)s\t%(message)s')
