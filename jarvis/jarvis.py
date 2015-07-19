@@ -1,3 +1,5 @@
+import re
+
 __author__ = 'semih'
 
 import random
@@ -5,6 +7,10 @@ from random import randint
 import time
 import logging
 import os
+
+from lib.google import search
+import urllib2
+from bs4 import BeautifulSoup
 
 from actions import *
 from settings import *
@@ -50,12 +56,12 @@ class Jarvis:
     def wakeup(self):
 
         welcome = self.hi()
-        print '\n\n' + welcome + ", what can I help you with?\n"
+        print '\n\n' + welcome + "."
         self.logger.info("Woke up.")
 
         while self.status:
             try:
-                message = str(raw_input(""))
+                message = str(raw_input("What can I help you with?\n"))
                 answer = self.answer(message)
                 print answer
             except KeyboardInterrupt:
@@ -135,23 +141,55 @@ class Jarvis:
         elif action == self.actions.about_master:
             options = self.get_options_for_personal_questions('master', message)
         elif action == self.actions.search_google:  # get results from google
-            query = self.rewrite_question('google', message)
-            options = self.research(query)
+            options = self.make_search(message, 'google')
         elif action == self.actions.search_wolfram:  # get results from wolfram
-            query = self.rewrite_question('wolfram', message)
-            options = self.research(query)
+            options = self.make_search(message, 'wolfram')
         elif action == self.actions.search_wikipedia:  # get results from wikipedia
-            query = self.rewrite_question('wikipedia', message)
-            options = self.research(query)
+            options = self.make_search(message, 'wikipedia')
         else:
             rand = randint(0, len(self.settings.sorry_messages) - 1)
             options = [self.settings.sorry_messages[rand]]
         return options
 
-    def research(self, query):
+    def make_search(self, query, source):
 
-        options = ['nothing yet...']
+        query = self.rewrite_question(source, query)
+
+        search_results = []
+        trusted_results = []
+        urls = search(query, stop=10)  # make a search
+
+        for i, url in enumerate(urls):
+            search_results.append(url)
+            if url.find('wikipedia') > 0 and i < 3:  # trusted source, more likely to include answer, skip if not in the top 3
+                trusted_results.append(url)
+        try:
+
+            if len(trusted_results) > 0:
+                html = urllib2.urlopen(trusted_results[0]).read()
+                soup = BeautifulSoup(html, 'html.parser')
+                p = soup.find('div', id="bodyContent").p
+                soup_p = BeautifulSoup(str(p), 'html.parser')
+                text = soup_p.get_text()
+            else:
+                # print search_results[0]
+                html = urllib2.urlopen(search_results[0]).read()
+                soup = BeautifulSoup(html, 'html.parser')
+                p = soup.find_all('p')
+                soup_p = BeautifulSoup(str(p), 'html.parser')
+                text = soup_p.get_text()
+                pat = re.compile(r'([A-Z][^\.!?]*[\.!?])', re.M)  # pattern: Uppercase, and anything that is not in (.!?), and one of them
+                matches = pat.findall(text)
+                if len(matches) > 3:
+                    text = ''.join(matches[0:3])
+                else:
+                    text = ''.join(matches[0:])
+        except:
+            text = ''
+
+        options = [text]
         return options
+
 
     def explain(self, options, message):
 
@@ -178,8 +216,15 @@ class Jarvis:
         query = message  # by default, set it to message
 
         if source == 'google':
-            query = str(message).replace('', '')
+            for r in self.settings.rudimentary_question_tags:
+                query = query.replace(r, '')
+
+            query = query.replace('is', '')
+            query = query.replace('are', '')
+            query = query.strip()
+
         return query
+
 
 def main(self):
 

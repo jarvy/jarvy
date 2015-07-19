@@ -41,10 +41,19 @@ or without git
 pip install —upgrade https://github.com/jarvy/jarvis/tarball/master
 </pre>
 
+#### Usage
+
+<pre>
+	> Jarvis
+	> Yes sir
+	> who is the director of ex machina?
+	> Ex Machina is a 2015 British science fiction thriller film written and directed by Alex Garland, marking his directorial debut.
+	> who wrote iliad?
+	> Homer is best known as the author of the Iliad and the Odyssey.
+</pre>
 
 #### Ideas
 
-- Use google as source? We might need to rewrite the question. But when and how?
 - Add wikipedia as knowledge base. Maybe simple english?
 - Add Wolfram alpha as endpoint
 - Cosine similarity. gensim might be a good idea.
