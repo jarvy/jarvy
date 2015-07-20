@@ -5,7 +5,7 @@ class Actions:
     def __init__(self):
         pass
 
-    about_jarvis = 1
+    about_jarvy = 1
     direct_address = 2
     about_master = 3
     search_google = 4
@@ -17,7 +17,7 @@ class Actions:
 # def enum(**enums):
 #     return type('Enum', (), enums)
 #
-# actions = enum(about_jarvis=1,
+# actions = enum(about_jarvy=1,
 #                direct_address=2,
 #                about_master=3,
 #                search_google=4,
