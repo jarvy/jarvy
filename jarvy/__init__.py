@@ -1,26 +1,23 @@
 import re
-
-__author__ = 'semih'
-
 import random
 from random import randint
 import time
 import logging
 import os
-
-from lib.google import search
 import urllib2
 from bs4 import BeautifulSoup
+
+from packages.google import search
 
 from actions import *
 from settings import *
 
 
-class Jarvis:
-    """ Core jarvis class
+class Jarvy:
+    """ Core jarvy class
     """
 
-    __LOG_LOCATION__ = "log/jarvis.log"
+    __LOG_LOCATION__ = "log/jarvy.log"
 
     def __init__(self):
 
@@ -33,7 +30,7 @@ class Jarvis:
 
     def __setupLogger__(self):
 
-        self.logger = logging.getLogger('Jarvis')
+        self.logger = logging.getLogger('Jarvy')
         self.logger.setLevel(logging.INFO)
 
         # Log formatting
@@ -120,13 +117,13 @@ class Jarvis:
 
     def understand(self, message):
 
-        if any(m in message for m in self.settings.personal_message_for_jarvis):    # it is something about the jarvis
-            action = self.actions.about_jarvis
-        elif message == self.settings.jarvis_name:
+        if any(m in message for m in self.settings.personal_message_for_jarvy):    # it is something about the jarvy
+            action = self.actions.about_jarvy
+        elif message == self.settings.jarvy_name:
             action = self.actions.direct_address
         elif any(m in message for m in self.settings.personal_message_for_master):   # it is something about the master
             action = self.actions.about_master
-        elif any(m in message for m in self.settings.rudimentary_question_tags):     # we can rewrite the message as a search query
+        elif any(m in message for m in self.settings.rudimentary_question_tags):     # rewrite message as a search query
             action = self.actions.search_google
         else:
             action = self.actions.say_sorry
@@ -134,8 +131,8 @@ class Jarvis:
 
     def think(self, action, message):
 
-        if action == self.actions.about_jarvis:
-            options = self.get_options_for_personal_questions('jarvis', message)
+        if action == self.actions.about_jarvy:
+            options = self.get_options_for_personal_questions('jarvy', message)
         elif action == self.actions.direct_address:
             options = ['Yes ' + self.settings.master_formal_address]
         elif action == self.actions.about_master:
@@ -161,7 +158,7 @@ class Jarvis:
 
         for i, url in enumerate(urls):
             search_results.append(url)
-            if url.find('wikipedia') > 0 and i < 3:  # trusted source, more likely to include answer, skip if not in the top 3
+            if url.find('wikipedia') > 0 and i < 3:  # trusted source, skip if not in the top 3
                 trusted_results.append(url)
         try:
 
@@ -172,13 +169,12 @@ class Jarvis:
                 soup_p = BeautifulSoup(str(p), 'html.parser')
                 text = soup_p.get_text()
             else:
-                # print search_results[0]
                 html = urllib2.urlopen(search_results[0]).read()
                 soup = BeautifulSoup(html, 'html.parser')
                 p = soup.find_all('p')
                 soup_p = BeautifulSoup(str(p), 'html.parser')
                 text = soup_p.get_text()
-                pat = re.compile(r'([A-Z][^\.!?]*[\.!?])', re.M)  # pattern: Uppercase, and anything that is not in (.!?), and one of them
+                pat = re.compile(r'([A-Z][^\.!?]*[\.!?])', re.M)  # pattern to detect sentences
                 matches = pat.findall(text)
                 if len(matches) > 3:
                     text = ''.join(matches[0:3])
@@ -189,7 +185,6 @@ class Jarvis:
 
         options = [text]
         return options
-
 
     def explain(self, options, message):
 
@@ -202,7 +197,7 @@ class Jarvis:
 
     def get_options_for_personal_questions(self, person, message):
 
-        if person == 'jarvis':
+        if person == 'jarvy':
             options = ['Let\'s not talk about me.']
         elif person == 'master':
             options = ['You know, I can\'t answer that']
@@ -228,8 +223,9 @@ class Jarvis:
 
 def main(self):
 
-    jarvis = Jarvis()
+    jarvy = Jarvy()
     return 0
 
 if __name__ == '__main__':
     main(None)
+
