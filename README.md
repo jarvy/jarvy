@@ -1,4 +1,4 @@
-# ![jarvy](https://dl.dropboxusercontent.com/u/16169065/hal9000.jpg)
+#![jarvy](https://dl.dropboxusercontent.com/u/16169065/hal9000.jpg)
 *Dave Bowman (inside EVA pod) trying to convince HAL to open the pod bay doors in “2001: A Space Odyssey” (1968).* 
 
 <pre>Dave: Hello, HAL. Do you read me, HAL? 
@@ -23,11 +23,10 @@ The goal is to have **a lot of fun**, and see where this goes. I want Jarvy to b
 
 #### How?
 
-.. code-block:: python
-
+<pre>
     > import jarvy
     > jarvy = Jarvy()
-    ...
+</pre>
 
 #### Usage
 
