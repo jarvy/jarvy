@@ -1,8 +1,3 @@
-# Jarvy
-===========
-
-[![Travis](https://travis-ci.org/jarvy/jarvy.svg?branch=master)](https://github.com/jarvy/jarvy) [![PyPI](https://img.shields.io/pypi/v/jarvy.svg)](https://pypi.python.org/pypi/jarvy) [![PyPI](https://img.shields.io/pypi/dm/jarvy.svg)](https://pypi.python.org/pypi/jarvy)
-
 ![jarvy](https://dl.dropboxusercontent.com/u/16169065/hal9000.jpg)
 *Dave Bowman (inside EVA pod) trying to convince HAL to open the pod bay doors in “2001: A Space Odyssey” (1968).* 
 
@@ -14,7 +9,9 @@ HAL: I'm sorry, Dave. I'm afraid I can't do that.
 
 Although there has been several attempts in making the machines intelligent, the early prototypes were still dumb. Until 2015. Then came Jarvy.
 
-#### What is it?
+### Jarvy : Python Intelligent Assistant for Humans
+
+[![Travis](https://travis-ci.org/jarvy/jarvy.svg?branch=master)](https://github.com/jarvy/jarvy) [![PyPI](https://img.shields.io/pypi/v/jarvy.svg)](https://pypi.python.org/pypi/jarvy) [![PyPI](https://img.shields.io/pypi/dm/jarvy.svg)](https://pypi.python.org/pypi/jarvy)
 
 Jarvy, aims to help humans by trying to understand them and figuring out best ways to respond to them. Jarvy is named after Tony Stark's 
 artificially intelligent assistant in the Iron Man series. However, the inspiration is not restricted to the Iron Man series, but extends
