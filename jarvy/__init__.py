@@ -77,7 +77,7 @@ class Jarvy:
             try:
                 message = str(raw_input("What can I help you with?\n"))
 
-                if message in self.settings.exit_messages:
+                if any(m in message for m in self.settings.farewell_messages) and any(m in message for m in self.settings.jarvy_name):
                     self.sleep()
                 else:
                     answer = self.answer(message)
@@ -98,33 +98,42 @@ class Jarvy:
         chance = random.uniform(0, 100)
 
         if chance <= 20:
-            greeting = 'Hello'
+            greeting = 'Hello ' + self.settings.master_name
+        elif chance <= 30:
+            greeting = 'Hi ' + self.settings.master_name
         elif chance <= 40:
-            greeting = 'Hi'
+            greeting = 'Hey'
         else:
             hour = int(time.strftime('%H', time.localtime()))
             if 0 <= hour < 5:
-                greeting = 'Good night'
+                greeting = 'Good night ' + self.settings.master_formal_address
             elif 5 <= hour < 12:
-                greeting = 'Good morning'
+                greeting = 'Good morning ' + self.settings.master_formal_address
             elif 12 <= hour < 17:
-                greeting = 'Good afternoon'
+                greeting = 'Good afternoon ' + self.settings.master_formal_address
             else:
-                greeting = 'Good evening'
+                greeting = 'Good evening ' + self.settings.master_formal_address
 
         return greeting
 
     def farewell(self):
 
-        hour = int(time.strftime('%H', time.localtime()))
-        if 0 <= hour < 5:
-            farewell = 'Good night'
-        elif 5 <= hour < 12:
-            farewell = 'Have a good day'
-        elif 12 <= hour < 17:
-            farewell = 'See you again'
+        chance = random.uniform(0, 100)
+
+        if chance <= 20:
+            farewell = 'Good bye ' + self.settings.master_name
+        elif chance <= 40:
+            farewell = 'Farewell my friend'
         else:
-            farewell = 'Good night'
+            hour = int(time.strftime('%H', time.localtime()))
+            if 0 <= hour < 5:
+                farewell = 'Good night ' + self.settings.master_formal_address
+            elif 5 <= hour < 12:
+                farewell = 'Have a good day ' + self.settings.master_formal_address
+            elif 12 <= hour < 17:
+                farewell = 'Good afternoon ' + self.settings.master_formal_address
+            else:
+                farewell = 'Good evening ' + self.settings.master_formal_address
 
         return farewell
 

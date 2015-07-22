@@ -36,8 +36,8 @@ The goal is to have **a lot of fun**, and see where this goes. I want Jarvy to b
       and directed by Alex Garland, marking his directorial debut.
     > who wrote iliad?
     > Homer is best known as the author of the Iliad and the Odyssey.
-    > quit
-	> Good night
+    > Good bye jarvy
+	> Good night sir
 
 #### Installation
 
