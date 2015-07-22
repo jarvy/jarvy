@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import re
 import random
 from random import randint
@@ -12,9 +14,24 @@ from packages.google import search
 from actions import *
 from settings import *
 
+"""
+Jarvy : Python Intelligent Assistant for Humans
+=================
+
+Jarvy, aims to help humans by trying to understand them and figuring out best ways to respond to them.
+
+"""
+
+__title__ = 'jarvy'
+__version__ = '1.2.0'
+__build__ = 0x012000
+__author__ = 'Semih Yagcioglu'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2015 Semih Yagcioglu'
+
 
 class Jarvy:
-    """ Core jarvy class
+    """ Jarvy : Python Intelligent Assistant for Humans
     """
 
     __LOG_LOCATION__ = "log/jarvy.log"
@@ -59,8 +76,12 @@ class Jarvy:
         while self.status:
             try:
                 message = str(raw_input("What can I help you with?\n"))
-                answer = self.answer(message)
-                print answer
+
+                if message in self.settings.exit_messages:
+                    self.sleep()
+                else:
+                    answer = self.answer(message)
+                    print answer
             except KeyboardInterrupt:
                 self.sleep()
 
@@ -219,6 +240,12 @@ class Jarvy:
             query = query.strip()
 
         return query
+
+
+def start():
+
+    jarvyInstance = Jarvy()
+    return jarvyInstance
 
 
 def main(self):

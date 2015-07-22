@@ -26,7 +26,7 @@ class Settings:
                       'Believe me I am trying but, I simply could not answer that',
                       'I think I do not understand you',
                       'Hmmm, I am doing my best,just be patient, OK?']
-    exit_messages = ['exit', 'terminate', 'go away', 'bored', 'enough', 'quit']
+    exit_messages = ['exit', 'terminate', 'quit']
     positive_answers = ['Yes', 'Of course', 'Definitely']
     negative_answers = ['No', 'Nope', 'I don\'t think so', 'Sorry']
     personal_message_for_jarvy = ['you', 'yourself']

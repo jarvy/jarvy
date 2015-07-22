@@ -1,17 +1,16 @@
 ![jarvy](https://dl.dropboxusercontent.com/u/16169065/hal9000.jpg)
 *Dave Bowman (inside EVA pod) trying to convince HAL to open the pod bay doors in “2001: A Space Odyssey” (1968).* 
 
-<pre>Dave: Hello, HAL. Do you read me, HAL? 
-HAL: Affirmative, Dave. I read you. 
-Dave: Open the pod bay doors, HAL. 
-HAL: I'm sorry, Dave. I'm afraid I can't do that. 
-</pre>
+	Dave: Hello, HAL. Do you read me, HAL? 
+	HAL: Affirmative, Dave. I read you. 
+	Dave: Open the pod bay doors, HAL. 
+	HAL: I'm sorry, Dave. I'm afraid I can't do that. 
 
 Although there has been several attempts in making the machines intelligent, the early prototypes were still dumb. Until 2015. Then came Jarvy.
 
 ### Jarvy : Python Intelligent Assistant for Humans
 
-[![Travis](https://travis-ci.org/jarvy/jarvy.svg?branch=master)](https://github.com/jarvy/jarvy) [![PyPI](https://img.shields.io/pypi/v/jarvy.svg)](https://pypi.python.org/pypi/jarvy) [![PyPI](https://img.shields.io/pypi/dm/jarvy.svg)](https://pypi.python.org/pypi/jarvy)
+[![Travis](https://travis-ci.org/jarvy/jarvy.svg?branch=master)](https://github.com/jarvy/jarvy) [![PyPIv](https://img.shields.io/pypi/v/jarvy.svg)](https://pypi.python.org/pypi/jarvy) [![PyPImd](https://img.shields.io/pypi/dm/jarvy.svg)](https://pypi.python.org/pypi/jarvy)
 
 Jarvy, aims to help humans by trying to understand them and figuring out best ways to respond to them. Jarvy is named after Tony Stark's 
 artificially intelligent assistant in the Iron Man series. However, the inspiration is not restricted to the Iron Man series, but extends
@@ -21,41 +20,28 @@ By design Jarvy does not aim harm, but this is software. Who knows, what could g
 
 #### Why?
 
-The goal is to have **a lot of fun**, and see where this goes. I want Jarvy to be **fully** customizable and expendable.
+The goal is to have **a lot of fun**, and see where this goes. I want Jarvy to be **fully** customizable and extensible.
 
 #### How?
 
-<pre>
-> import jarvy
-> jarvy = Jarvy()
-</pre>
+    > import jarvy
+    > j = jarvy.start()
 
 #### Usage
 
-<pre>
-> Jarvy
-> Yes sir
-> who is the director of ex machina?
-> Ex Machina is a 2015 British science fiction thriller film written 
-  and directed by Alex Garland, marking his directorial debut.
-> who wrote iliad?
-> Homer is best known as the author of the Iliad and the Odyssey.
-</pre>
+    > Jarvy
+    > Yes sir
+    > who is the director of ex machina?
+    > Ex Machina is a 2015 British science fiction thriller film written 
+      and directed by Alex Garland, marking his directorial debut.
+    > who wrote iliad?
+    > Homer is best known as the author of the Iliad and the Odyssey.
+    > quit
+	> Good night
 
 #### Installation
 
-I am working on a setup, but for the time being you can install Jarvy via VCS.
-
-<pre>
-# install via git
-$ pip install git+git://github.com/jarvy/jarvy.git
-
-# install via git+https
-$ pip install git+https://github.com/jarvy/jarvy.git
-
-# install without git
-$ pip install —upgrade https://github.com/jarvy/jarvy/tarball/master
-</pre>
+    $ pip install jarvy
 
 #### Contribution
 
@@ -72,9 +58,8 @@ prototype of Jarvy will be simple. Parse the query, gather information, evaluate
 
 - Need to write some unit tests, should use nose?
 - Add Wolfram alpha as endpoint
-- Integrate Travis CI for testing and deployment
 - Add wikipedia as knowledge base. Maybe simple english?
-- Cosine similarity. gensim might be a good idea.
+- Use cosine similarity. gensim might be a good idea.
 - How about shallow parsing?
 - A hook to production server for the web binding?
 - How to score multiple sources, and rank them?
