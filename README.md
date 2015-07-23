@@ -45,19 +45,19 @@ The goal is to have **a lot of fun**, and see where this goes. I want Jarvy to b
 
 #### Contribution
 
-There are several ways to improve Jarvy. If you have **any** suggestions, please let me know. Or better, fork the repository, play with Jarvy and contribute by just sending a pull request. 
+Hey, did you know that you can make a huge difference here? We can **together** improve Jarvy. Besides, it's more fun together! If you have **any** suggestions, please let me know. Or better, fork the repository, play with Jarvy and contribute by just sending a pull request. 
 
 I **accept** pull requests.
 
 #### Roadmap
 
-Jarvy is written in Python. There is also a [Django interface](https://github.com/semihyagcioglu/advocatus) in the making. The first 
-prototype of Jarvy will be simple. Parse the query, gather information, evaluate findings and respond, that's all.
+Jarvy is written in Python. There is also a [Django interface](https://github.com/jarvy/face) in the making. I want Jarvy to be dead simple. I want Jarvy to be beautiful. Because you know, [simple is better than complex and beautiful is better than ugly](https://www.python.org/dev/peps/pep-0020/). 
 
 #### Ideas
 
-- Need to write some unit tests, should use nose?
+- Need to write some unit tests, should use nosetests?
 - Add Wolfram alpha as endpoint
+- Jarvy should be able learn.
 - Add wikipedia as knowledge base. Maybe simple english?
 - Use cosine similarity. gensim might be a good idea.
 - How about shallow parsing?

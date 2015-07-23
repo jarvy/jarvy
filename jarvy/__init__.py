@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import re
 import random
 from random import randint
@@ -23,8 +21,8 @@ Jarvy, aims to help humans by trying to understand them and figuring out best wa
 """
 
 __title__ = 'jarvy'
-__version__ = '1.2.0'
-__build__ = 0x012000
+__version__ = '1.2.5'
+__build__ = 0x010205
 __author__ = 'Semih Yagcioglu'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2015 Semih Yagcioglu'
@@ -54,9 +52,9 @@ class Jarvy:
         formatter = logging.Formatter('%(asctime)s\t%(name)s\t%(levelname)s\t%(message)s')
 
         # Console handler
-        ch = logging.StreamHandler()
-        ch.setFormatter(formatter)
-        self.logger.addHandler(ch)
+        # ch = logging.StreamHandler()
+        # ch.setFormatter(formatter)
+        # self.logger.addHandler(ch)
 
         # Logfile handler
         directory = os.path.dirname(self.__LOG_LOCATION__)
@@ -75,7 +73,7 @@ class Jarvy:
 
         while self.status:
             try:
-                message = str(raw_input("What can I help you with?\n"))
+                message = str(raw_input("What can I help you with?\n")).lower()
 
                 if any(m in message for m in self.settings.farewell_messages) and any(m in message for m in self.settings.jarvy_name):
                     self.sleep()
@@ -140,20 +138,20 @@ class Jarvy:
     def answer(self, message):
 
         action = self.understand(message)
-        options = self.think(action, message)
-        answer = self.explain(options, message)
+        responses = self.think(action, message)
+        answer = self.explain(responses, message)
 
         return answer
 
     def understand(self, message):
 
-        if any(m in message for m in self.settings.personal_message_for_jarvy):    # it is something about the jarvy
+        if any(m in message.split() for m in self.settings.personal_message_for_jarvy):    # it is something about the jarvy
             action = self.actions.about_jarvy
-        elif message == self.settings.jarvy_name:
+        elif message == self.settings.jarvy_name.lower():  # direct address to jarvy
             action = self.actions.direct_address
-        elif any(m in message for m in self.settings.personal_message_for_master):   # it is something about the master
+        elif any(m.lower() in message.split() for m in self.settings.personal_message_for_master):   # it is something about the master
             action = self.actions.about_master
-        elif any(m in message for m in self.settings.rudimentary_question_tags):     # rewrite message as a search query
+        elif any(m.lower() in message.split() for m in self.settings.rudimentary_question_tags):     # rewrite message as a search query
             action = self.actions.search_google
         else:
             action = self.actions.say_sorry
@@ -162,21 +160,21 @@ class Jarvy:
     def think(self, action, message):
 
         if action == self.actions.about_jarvy:
-            options = self.get_options_for_personal_questions('jarvy', message)
+            responses = self.respond('jarvy')
         elif action == self.actions.direct_address:
-            options = ['Yes ' + self.settings.master_formal_address]
+            responses = self.respond('direct_address')
         elif action == self.actions.about_master:
-            options = self.get_options_for_personal_questions('master', message)
+            responses = self.respond('master')
         elif action == self.actions.search_google:  # get results from google
-            options = self.make_search(message, 'google')
+            responses = self.make_search(message, 'google')
         elif action == self.actions.search_wolfram:  # get results from wolfram
-            options = self.make_search(message, 'wolfram')
+            responses = self.make_search(message, 'wolfram')
         elif action == self.actions.search_wikipedia:  # get results from wikipedia
-            options = self.make_search(message, 'wikipedia')
+            responses = self.make_search(message, 'wikipedia')
         else:
             rand = randint(0, len(self.settings.sorry_messages) - 1)
-            options = [self.settings.sorry_messages[rand]]
-        return options
+            responses = [self.settings.sorry_messages[rand]]
+        return responses
 
     def make_search(self, query, source):
 
@@ -206,6 +204,7 @@ class Jarvy:
                 text = soup_p.get_text()
                 pat = re.compile(r'([A-Z][^\.!?]*[\.!?])', re.M)  # pattern to detect sentences
                 matches = pat.findall(text)
+
                 if len(matches) > 3:
                     text = ''.join(matches[0:3])
                 else:
@@ -213,28 +212,30 @@ class Jarvy:
         except:
             text = ''
 
-        options = [text]
-        return options
+        responses = [text]
+        return responses
 
-    def explain(self, options, message):
+    def explain(self, responses, message):
 
-        if len(options) >= 1:
-            answer = options[0]
+        if len(responses) >= 1:
+            answer = responses[0]
         else:
             rand = randint(0, len(self.settings.sorry_messages) - 1)
             answer = self.settings.sorry_messages[rand]
         return answer
 
-    def get_options_for_personal_questions(self, person, message):
+    def respond(self, about):
 
-        if person == 'jarvy':
-            options = ['Let\'s not talk about me.']
-        elif person == 'master':
-            options = ['You know, I can\'t answer that']
+        if about == 'jarvy':
+            responses = ['I am your friend.']
+        elif about == 'direct_address':
+            responses = ['Yes ' + self.settings.master_formal_address]
+        elif about == 'master':
+            responses = ['I\'m afraid, I can\'t answer that.']
         else:
-            options = ['']
+            responses = ['']
 
-        return options
+        return responses
 
     def rewrite_question(self, source, message):
 

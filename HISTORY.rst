@@ -3,6 +3,14 @@
 Release History
 ---------------
 
+1.2.5 (2015-07-23)
+++++++++++++++++++
+
+* Did some refactoring
+* Message comparison is now in lower case
+* Removed console stream for logging
+* Whitespace tokenization is now employed in word matching
+
 1.2.0 (2015-07-21)
 ++++++++++++++++++
 
