@@ -55,14 +55,13 @@ Jarvy is written in Python. There is also a [Django interface](https://github.co
 
 #### Ideas
 
-- Need to write some unit tests, should use nosetests?
 - Add Wolfram alpha as endpoint
+- Add scoring, maybe give weights for sources?
+- Add ranking to select the best response.
+- Need to write some unit tests, should use nosetests?
 - Jarvy should be able learn.
-- Add wikipedia as knowledge base. Maybe simple english?
 - Use cosine similarity. gensim might be a good idea.
-- How about shallow parsing?
 - A hook to production server for the web binding?
-- How to score multiple sources, and rank them?
 - Will probably need a database and an instantaneous search. Elasticsearch?
 - How about using redis?
 - How about heroku?

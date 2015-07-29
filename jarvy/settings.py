@@ -19,7 +19,7 @@ class Settings:
 
     # messages
     sorry_messages = ['I am sorry, I could not understand that', 'Oh oh',
-                      'I am afraid, I can\'t talk about that', 'Why do you want that?',
+                      'I am afraid, I can\'t talk about that',
                       'I am thinking but this beats me...', 'Allright allright, I give up', 'Who knows',
                       'Don\'t get me wrong but I don\'t know all the answers',
                       'Hey, why don\'t you ask me another question while I think more about that?',
@@ -32,3 +32,10 @@ class Settings:
     personal_message_for_jarvy = ['you', 'yourself']
     personal_message_for_master = ['me', 'myself', 'I']
     rudimentary_question_tags = ['who', 'why', 'when', 'where', 'what', 'which', 'how']
+
+    # algorithm parameters
+    number_of_search_results = 10
+    trusted_source_treshold = 3
+    number_of_minimum_sentences = 3  # should reconsider this
+
+

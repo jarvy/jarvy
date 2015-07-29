@@ -21,8 +21,8 @@ Jarvy, aims to help humans by trying to understand them and figuring out best wa
 """
 
 __title__ = 'jarvy'
-__version__ = '1.2.5'
-__build__ = 0x010205
+__version__ = '1.2.6'
+__build__ = 0x010206
 __author__ = 'Semih Yagcioglu'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2015 Semih Yagcioglu'
@@ -73,7 +73,7 @@ class Jarvy:
 
         while self.status:
             try:
-                message = str(raw_input("What can I help you with?\n")).lower()
+                message = str(raw_input("What can I help you with?\n\n")).lower()
 
                 if any(m in message for m in self.settings.farewell_messages) and any(m in message for m in self.settings.jarvy_name):
                     self.sleep()
@@ -182,42 +182,46 @@ class Jarvy:
 
         search_results = []
         trusted_results = []
-        urls = search(query, stop=10)  # make a search
 
-        for i, url in enumerate(urls):
-            search_results.append(url)
-            if url.find('wikipedia') > 0 and i < 3:  # trusted source, skip if not in the top 3
-                trusted_results.append(url)
         try:
+            urls = search(query, stop=self.settings.number_of_search_results)  # make a search
 
-            if len(trusted_results) > 0:
-                html = urllib2.urlopen(trusted_results[0]).read()
-                soup = BeautifulSoup(html, 'html.parser')
-                p = soup.find('div', id="bodyContent").p
-                soup_p = BeautifulSoup(str(p), 'html.parser')
-                text = soup_p.get_text()
-            else:
-                html = urllib2.urlopen(search_results[0]).read()
-                soup = BeautifulSoup(html, 'html.parser')
-                p = soup.find_all('p')
-                soup_p = BeautifulSoup(str(p), 'html.parser')
-                text = soup_p.get_text()
-                pat = re.compile(r'([A-Z][^\.!?]*[\.!?])', re.M)  # pattern to detect sentences
-                matches = pat.findall(text)
-
-                if len(matches) > 3:
-                    text = ''.join(matches[0:3])
+            for i, url in enumerate(urls):
+                search_results.append(url)
+                if url.find('wikipedia') > 0 and i < self.settings.trusted_source_treshold:  # trusted source, skip if not in there
+                    trusted_results.append(url)
+            try:
+                if len(trusted_results) > 0:
+                    html = urllib2.urlopen(trusted_results[0]).read()
+                    soup = BeautifulSoup(html, 'html.parser')
+                    p = soup.find('div', id="bodyContent").p
+                    soup_p = BeautifulSoup(str(p), 'html.parser')
+                    text = soup_p.get_text()
                 else:
-                    text = ''.join(matches[0:])
-        except:
-            text = ''
+                    html = urllib2.urlopen(search_results[0]).read()
+                    soup = BeautifulSoup(html, 'html.parser')
+                    p = soup.find_all('p')
+                    soup_p = BeautifulSoup(str(p), 'html.parser')
+                    text = soup_p.get_text()
+                    pat = re.compile(r'([A-Z][^\.!?]*[\.!?])', re.M)  # pattern to detect sentences
+                    matches = pat.findall(text)
 
-        responses = [text]
+                    if len(matches) > self.settings.number_of_minimum_sentences:
+                        text = ''.join(matches[0:self.settings.number_of_minimum_sentences])
+                    else:
+                        text = ''.join(matches[0:])
+
+                responses = [text]
+            except:
+                responses = []  # there is no proper response, but need to reconsider this
+        except:
+            responses = []  # no internet access
+
         return responses
 
     def explain(self, responses, message):
 
-        if len(responses) >= 1:
+        if len(responses) >= 1:  # if there is only one response
             answer = responses[0]
         else:
             rand = randint(0, len(self.settings.sorry_messages) - 1)
@@ -254,15 +258,15 @@ class Jarvy:
 
 def start():
 
-    jarvyInstance = Jarvy()
-    return jarvyInstance
+    j = Jarvy()
+    return j
 
 
-def main(self):
+def main():
 
-    jarvy = Jarvy()
-    return 0
+    j = Jarvy()
+    return j
 
 if __name__ == '__main__':
-    main(None)
+    main()
 
