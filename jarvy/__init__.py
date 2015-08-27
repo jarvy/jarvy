@@ -261,12 +261,6 @@ def start():
     j = Jarvy()
     return j
 
-
-def main():
-
-    j = Jarvy()
-    return j
-
 if __name__ == '__main__':
-    main()
+    start()
 
