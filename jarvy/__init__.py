@@ -139,7 +139,7 @@ class Jarvy:
 
         action = self.understand(message)
         responses = self.think(action, message)
-        answer = self.explain(responses, message)
+        answer = self.explain(responses)
 
         return answer
 
@@ -172,8 +172,12 @@ class Jarvy:
         elif action == self.actions.search_wikipedia:  # get results from wikipedia
             responses = self.make_search(message, 'wikipedia')
         else:
+            responses = []
+
+        if not responses:
             rand = randint(0, len(self.settings.sorry_messages) - 1)
             responses = [self.settings.sorry_messages[rand]]
+
         return responses
 
     def make_search(self, query, source):
@@ -209,7 +213,7 @@ class Jarvy:
                     if len(matches) > self.settings.number_of_minimum_sentences:
                         text = ''.join(matches[0:self.settings.number_of_minimum_sentences])
                     else:
-                        text = ''.join(matches[0:])
+                        text = ''.join(matches[0:])  # TODO: what if the answer is = ''
 
                 responses = [text]
             except:
@@ -219,13 +223,13 @@ class Jarvy:
 
         return responses
 
-    def explain(self, responses, message):
+    def explain(self, responses):
 
         if len(responses) >= 1:  # if there is only one response
             answer = responses[0]
         else:
-            rand = randint(0, len(self.settings.sorry_messages) - 1)
-            answer = self.settings.sorry_messages[rand]
+            pass  # TODO: scoring might be done here!
+
         return answer
 
     def respond(self, about):
@@ -249,8 +253,8 @@ class Jarvy:
             for r in self.settings.rudimentary_question_tags:
                 query = query.replace(r, '')
 
-            query = query.replace('is', '')
-            query = query.replace('are', '')
+            query = query.replace(' is ', ' ')
+            query = query.replace(' are ', ' ')
             query = query.strip()
 
         return query
