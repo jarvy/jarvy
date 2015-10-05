@@ -51,19 +51,14 @@ I **accept** pull requests.
 
 #### Roadmap
 
-Jarvy is written in Python. There is also a [Django interface](https://github.com/jarvy/face) in the making. I want Jarvy to be dead simple. I want Jarvy to be beautiful. Because you know, [simple is better than complex and beautiful is better than ugly](https://www.python.org/dev/peps/pep-0020/). 
+Jarvy is written in Python. There is also a [web interface](https://github.com/jarvy/face) in the making. I want Jarvy to be simple 
+and beautiful. Because you know, [simple is better than complex and beautiful is better than ugly](https://www.python.org/dev/peps/pep-0020/). 
 
 #### Ideas
 
 - Add Wolfram alpha as endpoint
 - Add scoring, maybe give weights for sources?
 - Add ranking to select the best response.
-- Need to write some unit tests, should use nosetests?
+- Unit tests would be nice.
 - Jarvy should be able learn.
-- Use cosine similarity. gensim might be a good idea.
-- A hook to production server for the web binding?
-- Will probably need a database and an instantaneous search. Elasticsearch?
-- How about using redis?
-- How about heroku?
-- Better logging mechanism
-- How about using a cache mechanism?
+- Continuous Integration would be nice.

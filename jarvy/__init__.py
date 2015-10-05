@@ -21,8 +21,8 @@ Jarvy, aims to help humans by trying to understand them and figuring out best wa
 """
 
 __title__ = 'jarvy'
-__version__ = '1.2.6'
-__build__ = 0x010206
+__version__ = '1.3.0'
+__build__ = 0x010300  # in the format of 00-00-00
 __author__ = 'Semih Yagcioglu'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2015 Semih Yagcioglu'
@@ -65,6 +65,7 @@ class Jarvy:
         fh.setFormatter(formatter)
         self.logger.addHandler(fh)
 
+    # starts jarvy
     def wakeup(self):
 
         welcome = self.hi()
@@ -83,6 +84,7 @@ class Jarvy:
             except KeyboardInterrupt:
                 self.sleep()
 
+    # terminates jarvy
     def sleep(self):
 
         farewell = self.farewell()
@@ -91,6 +93,7 @@ class Jarvy:
 
         self.logger.info("Slept.")
 
+    # produce salutation message
     def hi(self):
 
         chance = random.uniform(0, 100)
@@ -114,6 +117,7 @@ class Jarvy:
 
         return greeting
 
+    # produce farewell message
     def farewell(self):
 
         chance = random.uniform(0, 100)
@@ -135,6 +139,7 @@ class Jarvy:
 
         return farewell
 
+    # respond to the query message
     def answer(self, message):
 
         action = self.understand(message)

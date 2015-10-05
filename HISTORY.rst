@@ -6,10 +6,13 @@ Release History
 The latest version might be updated now and then. To keep things simpler, the latest version will override the previous one and be
 incremented over unless it is a milestone.
 
-1.2.6 (2015-07-29) [Latest Version]
+1.3.0 (2015-07-29) [Latest Version]
 ++++++++++++++++++
 
 * Handled no internet access case
+* Fixed a few bugs
+* Removed unnecessary package dependency
+* Did some refactoring
 
 1.2.5 (2015-07-23)
 ++++++++++++++++++
