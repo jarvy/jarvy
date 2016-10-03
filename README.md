@@ -45,18 +45,18 @@ The goal is to have **a lot of fun**, and see where this goes. I want Jarvy to b
 
 #### Contribution
 
-Hey, did you know that you can make a huge difference here? We can **together** improve Jarvy. Besides, it's more fun together! If you have **any** suggestions, please let me know. Or better, fork the repository, play with Jarvy and contribute by just sending a pull request. 
+Do you have **any** suggestions? Just send a pull request! 
 
 I **accept** pull requests.
 
-#### Roadmap
+#### Todo
 
-Jarvy is written in Python. There is also a [web interface](https://github.com/jarvy/face) in the making. I want Jarvy to be simple 
-and beautiful. Because you know, [simple is better than complex and beautiful is better than ugly](https://www.python.org/dev/peps/pep-0020/). 
+- Make Jarvy [OpenAI](https://gym.openai.com/) compatible.
 
 #### Ideas
 
-- Add Wolfram alpha as endpoint
+- Natural Language Understanding.
+- Adding Wolfram alpha as endpoint
 - Add scoring, maybe give weights for sources?
 - Add ranking to select the best response.
 - Unit tests would be nice.
